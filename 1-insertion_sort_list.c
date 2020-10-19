@@ -8,7 +8,7 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *current, *previous;
 
-	if (!(*list) || !(*list)->next || !(*list)->next->next)
+	if (!(*list) || !(*list)->next)
 		return;
 	/**
 	 * First loop to transverse the double linked list
