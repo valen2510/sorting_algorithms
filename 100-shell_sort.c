@@ -10,7 +10,7 @@ void shell_sort(int *array, size_t size)
 	unsigned int i, j, gap;
 	int insert_value;
 
-	if (!array)
+	if (!array || size < 2)
 		return;
 
 	/* Use Knuth sequence for gaps. Reach the biggest gap possible.*/
