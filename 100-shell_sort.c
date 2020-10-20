@@ -7,40 +7,41 @@
  */
 void shell_sort(int *array, size_t size)
 {
-	unsigned int i, j, interval;
+	unsigned int i, j, gap;
 	int insert_value;
 
-	/* Use Knuth sequence for intervals. Reach the biggest interval possible.*/
-	for (interval = 1; interval < size / 3; interval = interval * 3 + 1)
+	if (!array)
+		return;
+
+	/* Use Knuth sequence for gaps. Reach the biggest gap possible.*/
+	for (gap = 1; gap < size / 3; gap = gap * 3 + 1)
 		;
-	/* First loop to decrement interval after comparisons and swapping.*/
-	while (interval > 0)
+
+	/* First loop to decrement gap after comparisons and swapping.*/
+	while (gap > 0)
 	{
-		/* Second loop to tranverse array with intervals*/
-		for (i = interval; i < size; i++)
+		/* Second loop to tranverse array with gaps*/
+		for (i = gap; i < size; i++)
 		{
-			/* Set interval value in array as insert value to be inserted.*/
+			/* Set gap value in array as insert value to be inserted.*/
 			insert_value = array[i];
 
 			/*
 			* Third loop to check elements to shift towards right
-			* and compare with insert_value. In case insert value is smaller
+			* and compare with [0 ... insert_value]. In case insert value is smaller
 			* than integer at smaller position, then swap integer at j.
 			*/
-			j = i;
-			while (j >= interval && insert_value <= array[j - interval])
-			{
-				array[j] = array[j - interval];
-				j -= interval;
-			}
+			for (j = i; j >= gap && insert_value < array[j - gap]; j -= gap)
+				array[j] = array[j - gap];
+
 			/*
 			* Insert value at the last position of j.
-			* (The smaller position of the interval).
+			* (The smaller position of the gap).
 			*/
 			array[j] = insert_value;
 		}
-		/* Decrease interval and print array. */
-		interval /= 3;
+		/* Decrease gap and print array. */
+		gap /= 3;
 		print_array(array, size);
 	}
 }
